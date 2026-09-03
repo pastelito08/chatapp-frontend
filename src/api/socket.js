@@ -1,6 +1,8 @@
 function wsBase() {
-  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  return `${protocol}//${window.location.host}`;
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const url = new URL(apiUrl, window.location.origin);
+  const protocol = url.protocol === "https:" ? "wss:" : "ws:";
+  return `${protocol}//${url.host}`;
 }
 
 export function connectToChat(chatId, onMessage) {
